@@ -63,7 +63,7 @@ h1, h2, h3 {
     align-items: center;
     gap: 12px;
     padding: 0 0 18px 0 !important;
-    margin-top: -10px !important;
+    margin-top: 1px !important;
 }
 
 .brand-title {
