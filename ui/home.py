@@ -1,66 +1,9 @@
-"""Tampilan awal aplikasi KosEats AI."""
+"""Hero page sebelum user menekan tombol cari."""
 
-from __future__ import annotations
-
-import streamlit as st
 import streamlit.components.v1 as components
 
 
 def render_home() -> None:
-    """Render halaman awal sebelum user mencari paket makan."""
-
-    st.markdown(
-        """
-        <div style="
-            max-width: 900px;
-            margin: 0 auto 22px auto;
-            padding: 18px 22px;
-            background: linear-gradient(135deg, #1e2235 0%, #151824 100%);
-            border: 1px solid #2a2f45;
-            border-left: 5px solid #f5a623;
-            border-radius: 16px;
-            text-align: center;
-        ">
-            <div style="font-size:1.05rem; font-weight:700; color:#f5a623; margin-bottom:6px;">
-                Mulai dari sini 👇
-            </div>
-            <div style="font-size:0.95rem; color:#e8eaf0; line-height:1.7;">
-                Klik tombol <b>Cari Paket Makan Sekarang</b> untuk langsung mendapat rekomendasi menu.
-                Kalau mau lebih spesifik, atur budget, lokasi, rasa, dan pantangan bahan di sidebar kiri.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    c1, c2, c3 = st.columns([1.2, 1, 1.2])
-    with c2:
-        if st.button(
-            "🍽️ Cari Paket Makan Sekarang",
-            type="primary",
-            use_container_width=True,
-            key="home_search_button",
-        ):
-            st.session_state["has_searched"] = True
-            st.session_state["reroll_count"] = st.session_state.get("reroll_count", 0) + 1
-            st.session_state["recent_menu_ids"] = []
-            st.rerun()
-
-    st.markdown(
-        """
-        <div style="
-            text-align:center;
-            color:#7b8099;
-            font-size:0.82rem;
-            margin-top:8px;
-            margin-bottom:22px;
-        ">
-            Tips: buka sidebar kiri untuk mengubah preferensi sebelum mencari menu.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
     components.html(
         """
 <!DOCTYPE html>
@@ -75,30 +18,32 @@ def render_home() -> None:
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    padding: 40px 16px 32px;
+    min-height: 380px;
   }
   .tagline {
     font-size: 0.8rem;
     color: #888;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
     font-weight: 500;
   }
   .typing-wrapper {
-    min-height: 90px;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     width: 100%;
-    max-width: 720px;
-    margin-bottom: 42px;
+    max-width: 700px;
+    margin-bottom: 48px;
   }
   #typing-output {
     font-size: 1.3rem;
     line-height: 1.75;
     color: #f5a623;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     display: inline;
     text-shadow: 0 0 14px rgba(245, 166, 35, 0.18);
@@ -123,7 +68,7 @@ def render_home() -> None:
     flex-wrap: wrap;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.5s forwards;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
   }
   .hero-stat { text-align: center; }
   .hero-stat .num { font-size: 1.5rem; display: block; margin-bottom: 6px; }
@@ -162,7 +107,7 @@ def render_home() -> None:
   </div>
 
   <div class="hero-hint">
-    Atur preferensi di sidebar kiri, atau langsung klik tombol cari di atas.
+    ← Atur preferensi di sidebar, lalu tekan <strong>Cari Paket Makan</strong>
   </div>
 
   <script>
@@ -175,8 +120,6 @@ def render_home() -> None:
     ];
 
     const el = document.getElementById('typing-output');
-    const cur = document.getElementById('typing-cursor');
-
     let lineIdx = 0;
     let charIdx = 0;
     let isDeleting = false;
@@ -192,32 +135,30 @@ def render_home() -> None:
 
         if (charIdx > line.length) {
           pause++;
-
           if (pause < PAUSE_HOLD) {
             setTimeout(tick, 55);
             return;
           }
-
           pause = 0;
           isDeleting = true;
         }
 
         setTimeout(tick, 48);
-      } else {
-        el.textContent = line.substring(0, charIdx);
-        charIdx--;
-
-        if (charIdx < 0) {
-          isDeleting = false;
-          charIdx = 0;
-          lineIdx = (lineIdx + 1) % lines.length;
-
-          setTimeout(tick, 350);
-          return;
-        }
-
-        setTimeout(tick, 22);
+        return;
       }
+
+      el.textContent = line.substring(0, charIdx);
+      charIdx--;
+
+      if (charIdx < 0) {
+        isDeleting = false;
+        charIdx = 0;
+        lineIdx = (lineIdx + 1) % lines.length;
+        setTimeout(tick, 350);
+        return;
+      }
+
+      setTimeout(tick, 22);
     }
 
     setTimeout(tick, 700);
@@ -225,5 +166,5 @@ def render_home() -> None:
 </body>
 </html>
         """,
-        height=360,
+        height=420,
     )
