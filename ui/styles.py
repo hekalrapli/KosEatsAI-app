@@ -290,15 +290,15 @@ button[data-testid="collapsedControl"],
 /* Overlay visual agar tombol sidebar pasti terlihat */
 .sidebar-toggle-visual {
     position: fixed !important;
-    top: 10px !important;
-    left: 13px !important;
-    width: 42px !important;
-    height: 36px !important;
-    z-index: 10 !important;
+    top: 8px !important;
+    left: 10px !important;
+    width: 48px !important;
+    height: 42px !important;
+    z-index: 20 !important;
 
     background: #f5a623 !important;
     border: 2px solid #ffbd4a !important;
-    border-radius: 11px !important;
+    border-radius: 12px !important;
 
     display: flex !important;
     align-items: center !important;
@@ -310,30 +310,33 @@ button[data-testid="collapsedControl"],
     pointer-events: none !important;
 }
 
-/* Tampilkan ikon panah versi visual */
 .sidebar-toggle-visual::before {
     content: "»";
     color: #0f1117 !important;
-    font-size: 1.45rem !important;
+    font-size: 1.55rem !important;
     font-weight: 900 !important;
     line-height: 1 !important;
-    margin-top: -2px !important;
+    transform: translateY(-1px);
 }
 
-/* Teks kecil bantuan */
 .sidebar-toggle-hint {
     position: fixed !important;
-    top: 15px !important;
-    left: 62px !important;
-    z-index: 10 !important;
+    top: 12px !important;
+    left: 67px !important;
+    z-index: 20 !important;
 
     background: rgba(26, 29, 39, 0.96) !important;
-    border: 1px solid rgba(245, 166, 35, 0.55) !important;
+    border: 1px solid rgba(245, 166, 35, 0.65) !important;
     border-radius: 999px !important;
 
-    padding: 7px 12px !important;
-    color: #f5a623 !important;
+    height: 34px !important;
+    padding: 0 14px !important;
 
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    color: #f5a623 !important;
     font-family: 'Space Grotesk', sans-serif !important;
     font-size: 0.72rem !important;
     font-weight: 800 !important;
@@ -343,6 +346,8 @@ button[data-testid="collapsedControl"],
     box-shadow: 0 0 16px rgba(245, 166, 35, 0.22) !important;
     pointer-events: none !important;
 }
+
+/* Pastikan sidebar menutup overlay saat dibuka */
 [data-testid="stSidebar"] {
     z-index: 999 !important;
 }
