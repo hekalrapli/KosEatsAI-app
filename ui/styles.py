@@ -294,7 +294,7 @@ button[data-testid="collapsedControl"],
     left: 13px !important;
     width: 42px !important;
     height: 36px !important;
-    z-index: 999998 !important;
+    z-index: 10 !important;
 
     background: #f5a623 !important;
     border: 2px solid #ffbd4a !important;
@@ -325,7 +325,7 @@ button[data-testid="collapsedControl"],
     position: fixed !important;
     top: 15px !important;
     left: 62px !important;
-    z-index: 999998 !important;
+    z-index: 10 !important;
 
     background: rgba(26, 29, 39, 0.96) !important;
     border: 1px solid rgba(245, 166, 35, 0.55) !important;
@@ -342,6 +342,9 @@ button[data-testid="collapsedControl"],
 
     box-shadow: 0 0 16px rgba(245, 166, 35, 0.22) !important;
     pointer-events: none !important;
+}
+[data-testid="stSidebar"] {
+    z-index: 999 !important;
 }
 
 /* Animasi glow */
