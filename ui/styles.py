@@ -274,75 +274,74 @@ h1, h2, h3 {
 def get_sidebar_button_css() -> str:
     return """
 <style>
-/* Target tombol sidebar secara lebih luas */
+/* Percobaan target langsung ke tombol bawaan Streamlit */
 button[aria-label*="sidebar" i],
 button[title*="sidebar" i],
 button[data-testid="stSidebarCollapsedControl"],
 button[data-testid="collapsedControl"],
 [data-testid="stSidebarCollapsedControl"],
-[data-testid="collapsedControl"],
-[data-testid="stSidebarCollapsedControl"] button,
-[data-testid="collapsedControl"] button {
+[data-testid="collapsedControl"] {
     background: #f5a623 !important;
     border: 2px solid #ffbd4a !important;
     border-radius: 12px !important;
+    box-shadow: 0 0 22px rgba(245, 166, 35, 0.65) !important;
+}
 
-    width: 46px !important;
-    height: 46px !important;
-    min-width: 46px !important;
-    padding: 8px !important;
+/* Overlay visual agar tombol sidebar pasti terlihat */
+.sidebar-toggle-visual {
+    position: fixed !important;
+    top: 10px !important;
+    left: 13px !important;
+    width: 42px !important;
+    height: 36px !important;
+    z-index: 999998 !important;
+
+    background: #f5a623 !important;
+    border: 2px solid #ffbd4a !important;
+    border-radius: 11px !important;
 
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    color: #0f1117 !important;
-    box-shadow: 0 0 22px rgba(245, 166, 35, 0.65) !important;
+    box-shadow: 0 0 22px rgba(245, 166, 35, 0.75) !important;
     animation: sidebarButtonPulse 1.4s infinite !important;
-    transition: all 0.2s ease !important;
+
+    pointer-events: none !important;
 }
 
-/* Paksa warna ikon panah */
-button[aria-label*="sidebar" i] svg,
-button[title*="sidebar" i] svg,
-button[data-testid="stSidebarCollapsedControl"] svg,
-button[data-testid="collapsedControl"] svg,
-[data-testid="stSidebarCollapsedControl"] svg,
-[data-testid="collapsedControl"] svg,
-[data-testid="stSidebarCollapsedControl"] button svg,
-[data-testid="collapsedControl"] button svg {
+/* Tampilkan ikon panah versi visual */
+.sidebar-toggle-visual::before {
+    content: "»";
     color: #0f1117 !important;
-    fill: #0f1117 !important;
-    stroke: #0f1117 !important;
-    width: 26px !important;
-    height: 26px !important;
+    font-size: 1.45rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    margin-top: -2px !important;
 }
 
-/* Paksa path SVG ikut berubah */
-button[aria-label*="sidebar" i] svg path,
-button[title*="sidebar" i] svg path,
-button[data-testid="stSidebarCollapsedControl"] svg path,
-button[data-testid="collapsedControl"] svg path,
-[data-testid="stSidebarCollapsedControl"] svg path,
-[data-testid="collapsedControl"] svg path,
-[data-testid="stSidebarCollapsedControl"] button svg path,
-[data-testid="collapsedControl"] button svg path {
-    fill: #0f1117 !important;
-    stroke: #0f1117 !important;
-}
+/* Teks kecil bantuan */
+.sidebar-toggle-hint {
+    position: fixed !important;
+    top: 15px !important;
+    left: 62px !important;
+    z-index: 999998 !important;
 
-/* Hover */
-button[aria-label*="sidebar" i]:hover,
-button[title*="sidebar" i]:hover,
-button[data-testid="stSidebarCollapsedControl"]:hover,
-button[data-testid="collapsedControl"]:hover,
-[data-testid="stSidebarCollapsedControl"]:hover,
-[data-testid="collapsedControl"]:hover,
-[data-testid="stSidebarCollapsedControl"] button:hover,
-[data-testid="collapsedControl"] button:hover {
-    background: #ffbd4a !important;
-    transform: scale(1.08) !important;
-    box-shadow: 0 0 30px rgba(245, 166, 35, 0.9) !important;
+    background: rgba(26, 29, 39, 0.96) !important;
+    border: 1px solid rgba(245, 166, 35, 0.55) !important;
+    border-radius: 999px !important;
+
+    padding: 7px 12px !important;
+    color: #f5a623 !important;
+
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+
+    box-shadow: 0 0 16px rgba(245, 166, 35, 0.22) !important;
+    pointer-events: none !important;
 }
 
 /* Animasi glow */
@@ -364,3 +363,11 @@ button[data-testid="collapsedControl"]:hover,
 def apply_global_styles() -> None:
     st.markdown(get_global_css(), unsafe_allow_html=True)
     st.markdown(get_sidebar_button_css(), unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div class="sidebar-toggle-visual"></div>
+        <div class="sidebar-toggle-hint">Buka Preferensi</div>
+        """,
+        unsafe_allow_html=True,
+    )
