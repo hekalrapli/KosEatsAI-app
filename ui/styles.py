@@ -274,86 +274,73 @@ h1, h2, h3 {
 def get_sidebar_button_css() -> str:
     return """
 <style>
-/* Target tombol buka sidebar di beberapa versi Streamlit */
+/* Tombol buka sidebar: dibuat lebih mencolok */
 button[aria-label="Open sidebar"],
 button[title="Open sidebar"],
-[data-testid="stSidebarCollapsedControl"],
-[data-testid="collapsedControl"] {
-    position: fixed !important;
-    top: 70px !important;
-    left: 18px !important;
-    z-index: 999999 !important;
-
-    width: auto !important;
-    min-width: 185px !important;
-    height: 46px !important;
-    padding: 8px 16px !important;
+button[aria-label="Show sidebar"],
+button[title="Show sidebar"],
+[data-testid="stSidebarCollapsedControl"] button,
+[data-testid="collapsedControl"] button {
+    background: #f5a623 !important;
+    border: 2px solid #ffbd4a !important;
+    border-radius: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 8px !important;
 
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 10px !important;
 
-    background: linear-gradient(135deg, #1e2235 0%, #151824 100%) !important;
-    border: 2px solid #f5a623 !important;
-    border-radius: 999px !important;
-
-    color: #f5a623 !important;
-    box-shadow: 0 0 22px rgba(245, 166, 35, 0.35) !important;
-    animation: sidebarPulse 1.6s infinite !important;
-    cursor: pointer !important;
+    box-shadow: 0 0 20px rgba(245, 166, 35, 0.55) !important;
+    animation: sidebarButtonPulse 1.5s infinite !important;
+    transition: all 0.2s ease !important;
 }
 
-/* Hilangkan style default button */
-button[aria-label="Open sidebar"] *,
-button[title="Open sidebar"] *,
-[data-testid="stSidebarCollapsedControl"] *,
-[data-testid="collapsedControl"] * {
-    color: #f5a623 !important;
-    fill: #f5a623 !important;
-}
-
-/* Icon panah */
+/* Warna icon panah */
 button[aria-label="Open sidebar"] svg,
 button[title="Open sidebar"] svg,
-[data-testid="stSidebarCollapsedControl"] svg,
-[data-testid="collapsedControl"] svg {
+button[aria-label="Show sidebar"] svg,
+button[title="Show sidebar"] svg,
+[data-testid="stSidebarCollapsedControl"] button svg,
+[data-testid="collapsedControl"] button svg {
+    color: #0f1117 !important;
+    fill: #0f1117 !important;
+    stroke: #0f1117 !important;
     width: 24px !important;
     height: 24px !important;
 }
 
-/* Teks tambahan di tombol */
-button[aria-label="Open sidebar"]::after,
-button[title="Open sidebar"]::after,
-[data-testid="stSidebarCollapsedControl"]::after,
-[data-testid="collapsedControl"]::after {
-    content: "Buka Preferensi";
-    color: #f5a623 !important;
-    font-size: 0.78rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    white-space: nowrap !important;
-    font-family: 'Space Grotesk', sans-serif !important;
+/* Paksa path icon ikut berubah warna */
+button[aria-label="Open sidebar"] svg path,
+button[title="Open sidebar"] svg path,
+button[aria-label="Show sidebar"] svg path,
+button[title="Show sidebar"] svg path,
+[data-testid="stSidebarCollapsedControl"] button svg path,
+[data-testid="collapsedControl"] button svg path {
+    fill: #0f1117 !important;
+    stroke: #0f1117 !important;
 }
 
 /* Hover */
 button[aria-label="Open sidebar"]:hover,
 button[title="Open sidebar"]:hover,
-[data-testid="stSidebarCollapsedControl"]:hover,
-[data-testid="collapsedControl"]:hover {
-    transform: translateX(4px) !important;
-    border-color: #ffbd4a !important;
-    box-shadow: 0 0 30px rgba(245, 166, 35, 0.5) !important;
+button[aria-label="Show sidebar"]:hover,
+button[title="Show sidebar"]:hover,
+[data-testid="stSidebarCollapsedControl"] button:hover,
+[data-testid="collapsedControl"] button:hover {
+    background: #ffbd4a !important;
+    transform: scale(1.08) !important;
+    box-shadow: 0 0 28px rgba(245, 166, 35, 0.8) !important;
 }
 
-/* Animasi */
-@keyframes sidebarPulse {
+/* Animasi agar user sadar tombol bisa diklik */
+@keyframes sidebarButtonPulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.50);
+        box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.65);
     }
     70% {
-        box-shadow: 0 0 0 13px rgba(245, 166, 35, 0);
+        box-shadow: 0 0 0 10px rgba(245, 166, 35, 0);
     }
     100% {
         box-shadow: 0 0 0 0 rgba(245, 166, 35, 0);
